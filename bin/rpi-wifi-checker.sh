@@ -11,13 +11,18 @@
 # Version:   0.0.1
 
 
-script_name="rpi-wifi-checker"
+# Configuration w/safe defaults.
 upstream_ip=127.0.0.1
 
-path_config="/etc/${script_name}.conf"
-path_log="/var/log/${script_name}.log"
-path_script="/usr/local/bin/${script_name}.sh"
 
+# Related files
+name_script=$(basename "$0" .sh)
+path_config="/etc/${name_script}.conf"
+path_log="/var/log/${name_script}.log"
+path_script="/usr/local/bin/${name_script}.sh"
+
+
+# To create files and reboot, sudo required.
 if ! sudo true; then
     echo "ERROR: Unable to run via sudo! Cannot log or run properly."
     exit 1
@@ -35,9 +40,11 @@ function setup_file {
 setup_file $path_config "upstream_ip=${upstream_ip}"
 setup_file $path_log "# See ${path_script}"
 
+
+# Setup cron, guide the user a bit.
 if [[ "$1" == "setup" ]]; then
-    cron_task="*/5 * * * * /usr/bin/sudo -H ${path_script} /dev/null 2>&1"
-    ( crontab -l | grep -v -F "$path_script" ; echo "$cron_task" ) | crontab -
+    #cron_task="*/5 * * * * /usr/bin/sudo -H ${path_script} /dev/null 2>&1"
+    #( crontab -l | grep -v -F "$path_script" ; echo "$cron_task" ) | crontab -
     echo "Setup complete! Edit $path_config and set your upstream (router) IP"
 fi
 
