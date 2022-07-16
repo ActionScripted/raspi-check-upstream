@@ -38,6 +38,13 @@ function check_upstream {
 # Install cron task if not present.
 function setup_cron {
     cron_task="${cron_schedule} ${path_script} /dev/null 2>&1"
+
+    if [[ $(crontab -l) == "no crontab for root" ]]; then
+        touch /tmp/cron.empty
+        crontab /tmp/cron.empty
+        rm /tmp/cron.empty
+    fi
+
     ( crontab -l | grep -v -F "$path_script" ; echo "$cron_task" ) | crontab -
 }
 

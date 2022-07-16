@@ -17,7 +17,7 @@ script_remote="https://raw.githubusercontent.com/ActionScripted/raspi-check-upst
 echo "Downloading and installing; you will be prompted for your password."
 
 # Download
-curl ${script_remote} -O
+curl -s ${script_remote} -O
 
 # Install
 chmod a+x ${script_name}
