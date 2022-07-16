@@ -1,0 +1,23 @@
+[package]
+name = "wifi-checker"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+#[target.arm-unknown-linux-musleabi]
+#linker = "arm-linux-gnueabihf-ld"
+#
+#[target.x86_64-linux-musleabi]
+#linker = "x86_64-linux-gnueabihf-ld"
+#
+#[target.armv7-unknown-linux-musleabihf]
+#linker = "arm-linux-gnueabihf-ld"
+
+[build]
+target = "armv7-unknown-linux-musleabihf"
+#
+#[target.armv7-unknown-linux-gnueabihf]
+#linker = "arm-linux-gnueabihf-gcc"
+
+[dependencies]
