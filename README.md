@@ -7,8 +7,8 @@ Originally created to help with the Pi dropping wifi. Based on https://weworkwep
 ## Installation
 
 ```bash
-curl [TODO: this script]
-sudo ./raspi-check-upstream.sh setup
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ActionScripted/raspi-check-upstream/main/install.sh)"
+sudo /usr/local/bin/raspi-check-upstream.sh setup
 ```
 
 ## License
