@@ -49,7 +49,7 @@ function check_upstream {
 function setup_cron {
     check_root
 
-    cron_task="${cron_schedule} ${path_script} /dev/null 2>&1"
+    cron_task="${cron_schedule} ${path_script} check /dev/null 2>&1"
 
     if [[ $(crontab -l) == "no crontab for root" ]]; then
         touch /tmp/cron.empty
