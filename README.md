@@ -14,7 +14,7 @@ Now edit `/etc/raspi-check-upstream.conf` and set it to the upstream IP to check
 
 ## Usage
 
-Everything after installing is automatic! But here are available commands:
+Everything after installing is automatic! But here are the available commands:
 
 ```bash
 # Manually check/reboot (this is what runs via cron)
