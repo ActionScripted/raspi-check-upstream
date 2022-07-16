@@ -81,7 +81,22 @@ function show_logs {
 }
 
 
+# Uninstall ourselves as best we can.
+# TODO: cleanup cron automatically.
+function uninstall {
+    check_root
+
+    rm ${path_config}
+    rm ${path_log}
+    rm ${path_script}
+
+    echo "Files removed! You must manually delete cron task via:"
+    echo "sudo crontab -u root -e"
+}
+
+
 # Lazy args
 if [[ "$1" == "check" ]]; then check_upstream; fi
 if [[ "$1" == "logs" ]]; then show_logs; fi
 if [[ "$1" == "setup" ]]; then setup; fi
+if [[ "$1" == "uninstall" ]]; then uninstall; fi
