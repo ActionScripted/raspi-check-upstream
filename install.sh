@@ -11,7 +11,7 @@
 # Version:   0.0.1
 
 
-script_name="raspi-check-upstream.sh"
+script_name="raspi-check-upstream"
 script_remote="https://raw.githubusercontent.com/ActionScripted/raspi-check-upstream/main/${script_name}"
 
 echo "Downloading and installing; you will be prompted for your password."
