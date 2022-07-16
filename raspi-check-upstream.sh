@@ -45,24 +45,8 @@ function check_upstream {
 }
 
 
-# Install cron task if not present.
-function setup_cron {
-    check_root
-
-    cron_task="${cron_schedule} ${path_script} check /dev/null 2>&1"
-
-    if [[ $(crontab -l) == "no crontab for root" ]]; then
-        touch /tmp/cron.empty
-        crontab /tmp/cron.empty
-        rm /tmp/cron.empty
-    fi
-
-    (crontab -l | grep -v -F "$path_script" ; echo "$cron_task") | crontab -
-}
-
-
 # Setup config and log files if not present.
-function setup_files {
+function setup {
     check_root
 
     function setup_file {
@@ -75,21 +59,29 @@ function setup_files {
 
     setup_file $path_config "upstream_ip=${upstream_ip}"
     setup_file $path_log "# See ${path_script}"
+
+    cron_task="${cron_schedule} ${path_script} check /dev/null 2>&1"
+
+    if [[ $(crontab -l) == "no crontab for root" ]]; then
+        touch /tmp/cron.empty
+        crontab /tmp/cron.empty
+        rm /tmp/cron.empty
+    fi
+
+    (crontab -l | grep -v -F "$path_script" ; echo "$cron_task") | crontab -
+
+    echo "Setup complete! Edit $path_config and set your upstream (router) IP"
 }
 
 
 # Dump logs
 function show_logs {
-    echo "${path_log}..."
+    echo "(Log file: ${path_log})"
     cat ${path_log}
 }
 
+
+# Lazy args
 if [[ "$1" == "check" ]]; then check_upstream; fi
-
 if [[ "$1" == "logs" ]]; then show_logs; fi
-
-if [[ "$1" == "setup" ]]; then
-    setup_cron
-    setup_files
-    echo "Setup complete! Edit $path_config and set your upstream (router) IP"
-fi
+if [[ "$1" == "setup" ]]; then setup; fi
