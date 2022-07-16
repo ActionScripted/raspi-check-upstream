@@ -16,4 +16,4 @@ repos:
     -   id: beautysh
         args:
           - '--force-function-style=fnonly'
-          - '--indent-size==4'
+          - '--indent-size=4'
