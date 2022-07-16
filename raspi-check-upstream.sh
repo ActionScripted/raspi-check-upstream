@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 #
-# Raspberry Pi WiFi Checker
+# Raspberry Pi Check Upstream
 #
-# Ping a device and if it fails, reboot the Pi.
+# Ping upstream device and if it fails, reboot the Pi.
 #
 # Author:    Michael Thompson <actionscripted@gmail.com>
 # License:   MIT
 # Requires:  None
-# Usage:     ./raspi-check-wifi.sh [setup]
+# Usage:     ./raspi-check-upstream.sh [check|setup]
 # Version:   0.0.1
 
 

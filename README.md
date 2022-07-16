@@ -1,13 +1,16 @@
-# raspberry-pi-wifi-checker
+# Raspberry Pi Check Upstream
 
-**Raspberry Pi WiFi dropping? Keep it alive, automatically!** Automatically setup a scheduled task via Cron that will reboot your Pi when it loses connection to your router. Log when it reboots, so you can see when things happen.
+Setup a task via Cron that will reboot your Pi when it loses connection to an upstream device. Log when it reboots so you can see when things happen.
 
-_Based on https://weworkweplay.com/play/rebooting-the-raspberry-pi-when-it-loses-wireless-connection-wifi/_
+Originally created to help with the Pi dropping wifi. Based on https://weworkweplay.com/play/rebooting-the-raspberry-pi-when-it-loses-wireless-connection-wifi/
 
-## Usage
+## Installation
 
-TODO
+```bash
+curl [TODO: this script]
+sudo ./raspi-check-upstream.sh setup
+```
 
 ## License
 
-TODO
+[MIT](LICENSE)
