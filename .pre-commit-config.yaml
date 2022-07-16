@@ -5,6 +5,8 @@ repos:
     rev: v3.2.0
     hooks:
     -   id: check-added-large-files
+        args:
+          - '--maxkb=5000'
     -   id: check-yaml
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
@@ -13,7 +15,5 @@ repos:
     hooks:
     -   id: beautysh
         args:
-          - --force-function-style
-          - 'fnonly'
-          - --indent-size
-          - '4'
+          - '--force-function-style=fnonly'
+          - '--indent-size=4'
