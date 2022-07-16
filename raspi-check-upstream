@@ -7,26 +7,26 @@
 # Author:    Michael Thompson <actionscripted@gmail.com>
 # License:   MIT
 # Requires:  None
-# Usage:     ./raspi-check-upstream.sh [check|setup]
+# Usage:     ./raspi-check-upstream [check|logs|setup|uninstall]
 # Version:   0.0.1
 
 
 # Configuration w/safe defaults.
 cron_schedule="*/5 * * * *"
 script_arg=${1}
-script_name=$(basename "$0" .sh)
+script_name=$(basename "$0")
 upstream_ip=127.0.0.1
 
 # Related files
 path_config="/etc/${script_name}.conf"
 path_log="/var/log/${script_name}.log"
-path_script="/usr/local/bin/${script_name}.sh"
+path_script="/usr/local/bin/${script_name}"
 
 
 # Check running as root, quit if not.
 function check_root {
     if [[ $(id -u) -ne 0 ]] ; then
-        echo "Must run as root. Try \"sudo ${script_name}.sh ${script_arg}\""
+        echo "Must run as root. Try \"sudo ${script_name} ${script_arg}\""
         exit 1
     fi
 }
