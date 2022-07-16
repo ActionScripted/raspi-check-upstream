@@ -45,7 +45,7 @@ function setup_cron {
         rm /tmp/cron.empty
     fi
 
-    ( crontab -l | grep -v -F "$path_script" ; echo "$cron_task" ) | crontab -
+    (crontab -l | grep -v -F "$path_script" ; echo "$cron_task") | crontab -
 }
 
 
