@@ -22,14 +22,6 @@ path_log="/var/log/${script_name}.log"
 path_script="/usr/local/bin/${script_name}.sh"
 
 
-# To create files and reboot, sudo required.
-#if ! sudo true; then
-#    echo "ERROR: Unable to run via sudo! Cannot log or run properly."
-#    exit 1
-#fi
-
-
-##
 # Load config, ping upstream, reboot if errors.
 function check_upstream {
     source $path_config
@@ -43,7 +35,6 @@ function check_upstream {
 }
 
 
-##
 # Install cron task if not present.
 function setup_cron {
     cron_task="${cron_schedule} ${path_script} /dev/null 2>&1"
@@ -51,7 +42,6 @@ function setup_cron {
 }
 
 
-##
 # Setup config and log files if not present.
 function setup_files {
     function setup_file {
@@ -68,7 +58,7 @@ function setup_files {
 
 
 if [[ $(id -u) -ne 0 ]] ; then
-    echo 'Must run as root. Try " sudo ./raspi-check-wifi.sh"'
+    echo "Must run as root. Try \"sudo ./${script_name}.sh\""
     exit 1
 fi
 
