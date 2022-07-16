@@ -13,6 +13,7 @@
 
 # Configuration w/safe defaults.
 cron_schedule="*/5 * * * *"
+script_arg=${1}
 script_name=$(basename "$0" .sh)
 upstream_ip=127.0.0.1
 
@@ -25,7 +26,7 @@ path_script="/usr/local/bin/${script_name}.sh"
 # Check running as root, quit if not.
 function check_root {
     if [[ $(id -u) -ne 0 ]] ; then
-        echo "Must run as root. Try \"sudo ${script_name}.sh $1\""
+        echo "Must run as root. Try \"sudo ${script_name}.sh ${script_arg}\""
         exit 1
     fi
 }
@@ -96,7 +97,7 @@ function uninstall {
 
 
 # Lazy args
-if [[ "$1" == "check" ]]; then check_upstream; fi
-if [[ "$1" == "logs" ]]; then show_logs; fi
-if [[ "$1" == "setup" ]]; then setup; fi
-if [[ "$1" == "uninstall" ]]; then uninstall; fi
+if [[ "${script_arg}" == "check" ]]; then check_upstream; fi
+if [[ "${script_arg}" == "logs" ]]; then show_logs; fi
+if [[ "${script_arg}" == "setup" ]]; then setup; fi
+if [[ "${script_arg}" == "uninstall" ]]; then uninstall; fi
