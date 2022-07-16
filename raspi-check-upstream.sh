@@ -22,8 +22,18 @@ path_log="/var/log/${script_name}.log"
 path_script="/usr/local/bin/${script_name}.sh"
 
 
+# Check running as root, quit if not.
+function check_root {
+    if [[ $(id -u) -ne 0 ]] ; then
+        echo "Must run as root. Try \"sudo ${script_name}.sh $1\""
+        exit 1
+    fi
+}
+
 # Load config, ping upstream, reboot if errors.
 function check_upstream {
+    check_root
+
     source $path_config
 
     ping -c4 $upstream_ip > /dev/null
@@ -37,6 +47,8 @@ function check_upstream {
 
 # Install cron task if not present.
 function setup_cron {
+    check_root
+
     cron_task="${cron_schedule} ${path_script} /dev/null 2>&1"
 
     if [[ $(crontab -l) == "no crontab for root" ]]; then
@@ -51,6 +63,8 @@ function setup_cron {
 
 # Setup config and log files if not present.
 function setup_files {
+    check_root
+
     function setup_file {
         if [[ ! -f "$1" ]]; then
             echo "$2" >> $1
@@ -64,15 +78,18 @@ function setup_files {
 }
 
 
-if [[ $(id -u) -ne 0 ]] ; then
-    echo "Must run as root. Try \"sudo ./${script_name}.sh\""
-    exit 1
-fi
+# Dump logs
+function show_logs {
+    echo "${path_log}..."
+    cat ${path_log}
+}
+
+if [[ "$1" == "check" ]]; then check_upstream; fi
+
+if [[ "$1" == "logs" ]]; then show_logs; fi
 
 if [[ "$1" == "setup" ]]; then
     setup_cron
     setup_files
     echo "Setup complete! Edit $path_config and set your upstream (router) IP"
 fi
-
-if [[ "$1" == "check" ]]; then check_upstream; fi
