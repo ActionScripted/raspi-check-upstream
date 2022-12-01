@@ -61,14 +61,13 @@ function setup {
     setup_file $path_config "upstream_ip=${upstream_ip}"
     setup_file $path_log "# See ${path_script}"
 
-    cron_task="${cron_schedule} ${path_script} check /dev/null 2>&1"
-
     if [[ $(crontab -l) == "no crontab for root" ]]; then
         touch /tmp/cron.empty
         crontab /tmp/cron.empty
         rm /tmp/cron.empty
     fi
 
+    cron_task="${cron_schedule} ${path_script} check /dev/null 2>&1"
     (crontab -l | grep -v -F "$path_script" ; echo "$cron_task") | crontab -
 
     echo "Setup complete! Edit $path_config and set your upstream (router) IP"
